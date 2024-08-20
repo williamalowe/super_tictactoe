@@ -18,13 +18,28 @@ export default function Gameboard() {
     { position: 9, content: "" },
   ]);
 
-  useEffect(() => {
-    if(winner !== "") {
-      alert(`Game Over! ${winner} Wins!`)
+  const playTurn = (position: number) => {
+    if(winner === "") {
+      if (tiles[position].content !== "") {
+        alert("This tile is already taken!");
+      } else {
+        let updatedTile = { position: position, content: "" };
+        const newTiles = tiles.filter((tile) => tile.position !== position);
+        if (xTurn === true) {
+          updatedTile.content = "x";
+        } else {
+          updatedTile.content = "o";
+        }
+        setTiles([...newTiles, updatedTile]);
+        setXTurn(!xTurn)
+      }
+    } else {
+      alert(`Game is already over. ${winner} has won! Refresh page to restart.`)
     }
-  }, [winner, tiles, xTurn])
+    
+  };
 
-  const checkWinner = () => {
+  useEffect(() => {
     if (
       // Horizontal Wins
       tiles[1].content !== "" && tiles[1].content === tiles[2].content &&
@@ -47,26 +62,11 @@ export default function Gameboard() {
       tiles[5].content === tiles[7].content
     ) {
       setWinner(xTurn ? "O" : "X");
-    } else {
-      setXTurn(!xTurn)
     }
-  };
-
-  const playTurn = (position: number) => {
-    if (tiles[position].content !== "") {
-      alert("This tile is already taken!");
-    } else {
-      let updatedTile = { position: position, content: "" };
-      const newTiles = tiles.filter((tile) => tile.position !== position);
-      if (xTurn === true) {
-        updatedTile.content = "x";
-      } else {
-        updatedTile.content = "o";
-      }
-      setTiles([...newTiles, updatedTile]);
-      checkWinner();
+    if(winner !== "") {
+      alert(`Game Over! ${winner} Wins!`)
     }
-  };
+  }, [tiles, winner, xTurn])
 
   return (
     <div className="aspect-square grid grid-cols-3 gap-2">
