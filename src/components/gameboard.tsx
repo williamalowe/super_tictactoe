@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameTile from "./game-tile";
 
 export default function Gameboard() {
+  const [winner, setWinner] = useState("");
   const [xTurn, setXTurn] = useState(true);
   const [tiles, setTiles] = useState([
     { position: 0, content: "" },
@@ -17,6 +18,40 @@ export default function Gameboard() {
     { position: 9, content: "" },
   ]);
 
+  useEffect(() => {
+    if(winner !== "") {
+      alert(`Game Over! ${winner} Wins!`)
+    }
+  }, [winner, tiles, xTurn])
+
+  const checkWinner = () => {
+    if (
+      // Horizontal Wins
+      tiles[1].content !== "" && tiles[1].content === tiles[2].content &&
+      tiles[2].content === tiles[3].content ||
+      tiles[4].content !== "" && tiles[4].content === tiles[5].content &&
+      tiles[5].content === tiles[6].content ||
+      tiles[7].content !== "" && tiles[7].content === tiles[8].content &&
+      tiles[8].content === tiles[9].content ||
+      // Vertical Wins
+      tiles[1].content !== "" && tiles[1].content === tiles[4].content &&
+      tiles[4].content === tiles[7].content ||
+      tiles[2].content !== "" && tiles[2].content === tiles[5].content &&
+      tiles[5].content === tiles[8].content ||
+      tiles[3].content !== "" && tiles[3].content === tiles[6].content &&
+      tiles[6].content === tiles[9].content ||
+      // Diagonal Wins
+      tiles[1].content !== "" && tiles[1].content === tiles[5].content &&
+      tiles[5].content === tiles[9].content ||
+      tiles[3].content !== "" && tiles[3].content === tiles[5].content &&
+      tiles[5].content === tiles[7].content
+    ) {
+      setWinner(xTurn ? "O" : "X");
+    } else {
+      setXTurn(!xTurn)
+    }
+  };
+
   const playTurn = (position: number) => {
     if (tiles[position].content !== "") {
       alert("This tile is already taken!");
@@ -29,7 +64,7 @@ export default function Gameboard() {
         updatedTile.content = "o";
       }
       setTiles([...newTiles, updatedTile]);
-      setXTurn(!xTurn);
+      checkWinner();
     }
   };
 
