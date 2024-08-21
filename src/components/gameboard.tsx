@@ -6,12 +6,12 @@ export default function Gameboard({
   xTurn,
   isActive,
   handleTurn,
-  winner
+  setGameWinner
 }: {
   xTurn: boolean;
   isActive: boolean;
   handleTurn: () => void;
-  winner: string,
+  setGameWinner: (winner: string) => void;
 }) {
   const [boardWinner, setBoardWinner] = useState("");
   const [tiles, setTiles] = useState([
@@ -82,6 +82,7 @@ export default function Gameboard({
           tiles[5].content === tiles[7].content)
       ) {
         setBoardWinner(xTurn ? "O" : "X");
+        setGameWinner(xTurn ? "O" : "X");
       }
     }
 
