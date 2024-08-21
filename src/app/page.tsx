@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Gameboard from "@/components/gameboard";
 import { useEffect, useState } from "react";
 
@@ -17,45 +17,83 @@ export default function Home() {
 
   const handleTurn = () => {
     setXTurn(!xTurn);
-  }
+  };
+
+  const reset = () => {
+    setGameA1Winner("");
+    setGameA2Winner("");
+    setGameA3Winner("");
+    setGameB1Winner("");
+    setGameB2Winner("");
+    setGameB3Winner("");
+    setGameC1Winner("");
+    setGameC2Winner("");
+    setGameC3Winner("");
+    setGameWinner("");
+    setXTurn(true);
+  };
 
   useEffect(() => {
     if (
       // Horizontal Wins
-      gameA1Winner !== "" && gameA1Winner === gameA2Winner && gameA2Winner === gameA3Winner ||
-      gameB1Winner !== "" && gameB1Winner === gameB2Winner && gameB2Winner === gameB3Winner ||
-      gameC1Winner !== "" && gameC1Winner === gameC2Winner && gameC2Winner === gameC3Winner ||
+      (gameA1Winner !== "" &&
+        gameA1Winner === gameA2Winner &&
+        gameA2Winner === gameA3Winner) ||
+      (gameB1Winner !== "" &&
+        gameB1Winner === gameB2Winner &&
+        gameB2Winner === gameB3Winner) ||
+      (gameC1Winner !== "" &&
+        gameC1Winner === gameC2Winner &&
+        gameC2Winner === gameC3Winner) ||
       // Vertical Wins
-      gameA1Winner !== "" && gameA1Winner === gameB1Winner && gameB1Winner === gameC1Winner ||
-      gameA2Winner !== "" && gameA2Winner === gameB2Winner && gameB2Winner === gameC2Winner ||
-      gameA3Winner !== "" && gameA3Winner === gameB3Winner && gameB3Winner === gameC3Winner ||
+      (gameA1Winner !== "" &&
+        gameA1Winner === gameB1Winner &&
+        gameB1Winner === gameC1Winner) ||
+      (gameA2Winner !== "" &&
+        gameA2Winner === gameB2Winner &&
+        gameB2Winner === gameC2Winner) ||
+      (gameA3Winner !== "" &&
+        gameA3Winner === gameB3Winner &&
+        gameB3Winner === gameC3Winner) ||
       // Diagonal Wins
-      gameA1Winner !== "" && gameA1Winner === gameB2Winner && gameB2Winner === gameC3Winner ||
-      gameC1Winner !== "" && gameC1Winner === gameB2Winner && gameB2Winner === gameA3Winner 
+      (gameA1Winner !== "" &&
+        gameA1Winner === gameB2Winner &&
+        gameB2Winner === gameC3Winner) ||
+      (gameC1Winner !== "" &&
+        gameC1Winner === gameB2Winner &&
+        gameB2Winner === gameA3Winner)
     ) {
       setGameWinner(gameA1Winner);
-      alert("game over");
     }
-  }, [gameA1Winner, gameA2Winner, gameA3Winner, gameB1Winner, gameB2Winner, gameB3Winner, gameC1Winner, gameC2Winner, gameC3Winner ])
-
+  }, [
+    gameA1Winner,
+    gameA2Winner,
+    gameA3Winner,
+    gameB1Winner,
+    gameB2Winner,
+    gameB3Winner,
+    gameC1Winner,
+    gameC2Winner,
+    gameC3Winner,
+  ]);
 
   return (
     // <main className="h-screen grid items-center justify-center grid-cols-3 grid-rows-3 gap-2">
     <main className="flex h-screen flex-col items-center justify-center gap-y-4">
       <div className="flex gap-x-4 items-center">
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameA1Winner(winner)}
         />
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameA2Winner(winner)}
         />
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
@@ -63,19 +101,19 @@ export default function Home() {
         />
       </div>
       <div className="flex gap-x-4 items-center">
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameB1Winner(winner)}
         />
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameB2Winner(winner)}
         />
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
@@ -83,25 +121,39 @@ export default function Home() {
         />
       </div>
       <div className="flex gap-x-4 items-center">
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameC1Winner(winner)}
         />
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameC2Winner(winner)}
         />
-        <Gameboard 
+        <Gameboard
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
           setGameWinner={(winner: string) => setGameC3Winner(winner)}
         />
       </div>
+      {gameWinner !== "" && (
+        <div className="absolute w-[600px] h-[300px] border-2 border-black rounded bg-white/90 p-4 flex flex-col items-center justify-center">
+          <h3 className="text-2xl">{gameWinner} Wins!</h3>
+          <h5>
+            Better luck next time Player {gameWinner === "X" ? "O" : "X"}.
+          </h5>
+          <button
+            className="mt-12 px-2 uppercase text-white bg-black"
+            onClick={reset}
+          >
+            Start Again?
+          </button>
+        </div>
+      )}
     </main>
   );
 }
