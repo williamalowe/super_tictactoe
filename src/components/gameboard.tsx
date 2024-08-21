@@ -6,12 +6,14 @@ export default function Gameboard({
   xTurn,
   isActive,
   handleTurn,
+  winner
 }: {
   xTurn: boolean;
   isActive: boolean;
   handleTurn: () => void;
+  winner: string,
 }) {
-  const [winner, setWinner] = useState("");
+  const [boardWinner, setBoardWinner] = useState("");
   const [tiles, setTiles] = useState([
     { position: 0, content: "" },
     { position: 1, content: "" },
@@ -26,7 +28,7 @@ export default function Gameboard({
   ]);
 
   const playTurn = (position: number) => {
-    if (winner === "") {
+    if (boardWinner === "") {
       if (tiles[position].content !== "") {
         alert("This tile is already taken!");
       } else {
@@ -40,15 +42,16 @@ export default function Gameboard({
         setTiles([...newTiles, updatedTile]);
         handleTurn();
       }
-    } else {
-      alert(
-        `Game is already over. ${winner} has won! Refresh page to restart.`
-      );
     }
+    //  else {
+      // alert(
+        // `Game is already over. ${winner} has won! Refresh page to restart.`
+      // );
+    // }
   };
 
   useEffect(() => {
-    if (winner === "") {
+    if (boardWinner === "") {
       if (
         // Horizontal Wins
         (tiles[1].content !== "" &&
@@ -78,14 +81,14 @@ export default function Gameboard({
           tiles[3].content === tiles[5].content &&
           tiles[5].content === tiles[7].content)
       ) {
-        setWinner(xTurn ? "O" : "X");
+        setBoardWinner(xTurn ? "O" : "X");
       }
     }
 
     // if (winner !== "") {
     // alert(`Game Over! ${winner} Wins!`);
     // }
-  }, [tiles, winner, xTurn]);
+  }, [tiles, boardWinner, xTurn]);
 
   return (
     <div className={`relative aspect-square grid grid-cols-3 gap-2 p-4`}>
@@ -95,7 +98,7 @@ export default function Gameboard({
         .map((tile) => (
           <div
             key={tile.position}
-            className={`${winner === "" ? "opacity-100" : "opacity-40"}`}
+            className={`${boardWinner === "" ? "opacity-100" : "opacity-40"}`}
           >
             <GameTile
               content={tile.content}
@@ -103,12 +106,12 @@ export default function Gameboard({
             />
           </div>
         ))}
-      {winner === "X" ? (
+      {boardWinner === "X" ? (
         <div className="absolute right-[calc(50%+15vh)] top-[calc(50%-1vh)]">
           <div className="absolute w-[30vh] h-2 bg-red-600 rotate-45 rounded" />
           <div className="absolute w-[30vh] h-2 bg-red-600 -rotate-45 rounded" />
         </div>
-      ) : winner === "O" ? (
+      ) : boardWinner === "O" ? (
         <div className="absolute aspect-square w-[30vh] rounded-full border-8 border-blue-800 left-1 top-1" />
       ) : (
         ""

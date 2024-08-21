@@ -19,33 +19,19 @@ export default function Home() {
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
+          winner=""
         />
         <Gameboard 
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
+          winner=""
         />
         <Gameboard 
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
-        />
-      </div>
-      <div className="flex gap-x-4 items-center">
-        <Gameboard 
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-        />
-        <Gameboard 
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-        />
-        <Gameboard 
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
+          winner=""
         />
       </div>
       <div className="flex gap-x-4 items-center">
@@ -53,16 +39,39 @@ export default function Home() {
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
+          winner=""
         />
         <Gameboard 
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
+          winner=""
         />
         <Gameboard 
           xTurn={xTurn}
           isActive={true}
           handleTurn={handleTurn}
+          winner=""
+        />
+      </div>
+      <div className="flex gap-x-4 items-center">
+        <Gameboard 
+          xTurn={xTurn}
+          isActive={true}
+          handleTurn={handleTurn}
+          winner=""
+        />
+        <Gameboard 
+          xTurn={xTurn}
+          isActive={true}
+          handleTurn={handleTurn}
+          winner=""
+        />
+        <Gameboard 
+          xTurn={xTurn}
+          isActive={true}
+          handleTurn={handleTurn}
+          winner=""
         />
       </div>
     </main>
