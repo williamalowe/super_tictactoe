@@ -1,5 +1,6 @@
 "use client";
 import Gameboard from "@/components/gameboard";
+import GameOver from "@/components/gameOver";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -141,18 +142,10 @@ export default function Home() {
         />
       </div>
       {gameWinner !== "" && (
-        <div className="absolute w-[600px] h-[300px] border-2 border-black rounded bg-white/90 p-4 flex flex-col items-center justify-center">
-          <h3 className="text-2xl">{gameWinner} Wins!</h3>
-          <h5>
-            Better luck next time Player {gameWinner === "X" ? "O" : "X"}.
-          </h5>
-          <button
-            className="mt-12 px-2 uppercase text-white bg-black"
-            onClick={reset}
-          >
-            Start Again?
-          </button>
-        </div>
+        <GameOver 
+          winner={gameWinner}
+          handleReset={reset}
+        />
       )}
     </main>
   );
