@@ -19,7 +19,7 @@ export default function Gameboard() {
   ]);
 
   const playTurn = (position: number) => {
-    if(winner === "") {
+    if (winner === "") {
       if (tiles[position].content !== "") {
         alert("This tile is already taken!");
       } else {
@@ -31,55 +31,80 @@ export default function Gameboard() {
           updatedTile.content = "o";
         }
         setTiles([...newTiles, updatedTile]);
-        setXTurn(!xTurn)
+        setXTurn(!xTurn);
       }
     } else {
-      alert(`Game is already over. ${winner} has won! Refresh page to restart.`)
+      alert(
+        `Game is already over. ${winner} has won! Refresh page to restart.`
+      );
     }
-    
   };
 
   useEffect(() => {
     if (
       // Horizontal Wins
-      tiles[1].content !== "" && tiles[1].content === tiles[2].content &&
-      tiles[2].content === tiles[3].content ||
-      tiles[4].content !== "" && tiles[4].content === tiles[5].content &&
-      tiles[5].content === tiles[6].content ||
-      tiles[7].content !== "" && tiles[7].content === tiles[8].content &&
-      tiles[8].content === tiles[9].content ||
+      (tiles[1].content !== "" &&
+        tiles[1].content === tiles[2].content &&
+        tiles[2].content === tiles[3].content) ||
+      (tiles[4].content !== "" &&
+        tiles[4].content === tiles[5].content &&
+        tiles[5].content === tiles[6].content) ||
+      (tiles[7].content !== "" &&
+        tiles[7].content === tiles[8].content &&
+        tiles[8].content === tiles[9].content) ||
       // Vertical Wins
-      tiles[1].content !== "" && tiles[1].content === tiles[4].content &&
-      tiles[4].content === tiles[7].content ||
-      tiles[2].content !== "" && tiles[2].content === tiles[5].content &&
-      tiles[5].content === tiles[8].content ||
-      tiles[3].content !== "" && tiles[3].content === tiles[6].content &&
-      tiles[6].content === tiles[9].content ||
+      (tiles[1].content !== "" &&
+        tiles[1].content === tiles[4].content &&
+        tiles[4].content === tiles[7].content) ||
+      (tiles[2].content !== "" &&
+        tiles[2].content === tiles[5].content &&
+        tiles[5].content === tiles[8].content) ||
+      (tiles[3].content !== "" &&
+        tiles[3].content === tiles[6].content &&
+        tiles[6].content === tiles[9].content) ||
       // Diagonal Wins
-      tiles[1].content !== "" && tiles[1].content === tiles[5].content &&
-      tiles[5].content === tiles[9].content ||
-      tiles[3].content !== "" && tiles[3].content === tiles[5].content &&
-      tiles[5].content === tiles[7].content
+      (tiles[1].content !== "" &&
+        tiles[1].content === tiles[5].content &&
+        tiles[5].content === tiles[9].content) ||
+      (tiles[3].content !== "" &&
+        tiles[3].content === tiles[5].content &&
+        tiles[5].content === tiles[7].content)
     ) {
       setWinner(xTurn ? "O" : "X");
     }
-    if(winner !== "") {
-      alert(`Game Over! ${winner} Wins!`)
+    if (winner !== "") {
+      // alert(`Game Over! ${winner} Wins!`);
     }
-  }, [tiles, winner, xTurn])
+  }, [tiles, winner, xTurn]);
 
   return (
-    <div className="aspect-square grid grid-cols-3 gap-2">
+    <div className={`relative aspect-square grid grid-cols-3 gap-2 border-2 p-4 border-black/80 rounded`}>
       {tiles
         .sort((a, b) => (a.position > b.position ? 1 : -1))
         .slice(1, 10)
         .map((tile) => (
+          <div
+          key={tile.position}
+          className={`${winner === "" ? 'opacity-100' : 'opacity-40'}`}
+          >
           <GameTile
-            key={tile.position}
             content={tile.content}
             handleClick={() => playTurn(tile.position)}
           />
+          </div>
         ))}
+        {
+          winner === "X" ? 
+          <div className="absolute right-[calc(50%+15vh)] top-[calc(50%-1vh)]">
+            <div className="absolute w-[30vh] h-2 bg-black rotate-45"/>
+            <div className="absolute w-[30vh] h-2 bg-black -rotate-45"/>
+          </div>
+          :
+          winner === "O" ?
+          <div className="absolute aspect-square w-[30vh] rounded-full border-8 border-black left-1 top-1"/>
+          :
+          ""
+        }
     </div>
   );
 }
