@@ -20,12 +20,23 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (gameA1Winner !== "" && gameA1Winner === gameA2Winner && gameA2Winner === gameA3Winner) {
+    if (
+      // Horizontal Wins
+      gameA1Winner !== "" && gameA1Winner === gameA2Winner && gameA2Winner === gameA3Winner ||
+      gameB1Winner !== "" && gameB1Winner === gameB2Winner && gameB2Winner === gameB3Winner ||
+      gameC1Winner !== "" && gameC1Winner === gameC2Winner && gameC2Winner === gameC3Winner ||
+      // Vertical Wins
+      gameA1Winner !== "" && gameA1Winner === gameB1Winner && gameB1Winner === gameC1Winner ||
+      gameA2Winner !== "" && gameA2Winner === gameB2Winner && gameB2Winner === gameC2Winner ||
+      gameA3Winner !== "" && gameA3Winner === gameB3Winner && gameB3Winner === gameC3Winner ||
+      // Diagonal Wins
+      gameA1Winner !== "" && gameA1Winner === gameB2Winner && gameB2Winner === gameC3Winner ||
+      gameC1Winner !== "" && gameC1Winner === gameB2Winner && gameB2Winner === gameA3Winner 
+    ) {
       setGameWinner(gameA1Winner);
       alert("game over");
     }
-    console.log(gameA1Winner);
-  }, [xTurn, gameWinner, gameA3Winner])
+  }, [gameA1Winner, gameA2Winner, gameA3Winner, gameB1Winner, gameB2Winner, gameB3Winner, gameC1Winner, gameC2Winner, gameC3Winner ])
 
 
   return (
