@@ -97,13 +97,13 @@ export default function Home() {
             />
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameA2Winner(winner)}
             />
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameA3Winner(winner)}
             />
@@ -111,19 +111,19 @@ export default function Home() {
           <div className="flex gap-x-4 items-center">
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameB1Winner(winner)}
             />
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameB2Winner(winner)}
             />
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameB3Winner(winner)}
             />
@@ -131,19 +131,19 @@ export default function Home() {
           <div className="flex gap-x-4 items-center">
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameC1Winner(winner)}
             />
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameC2Winner(winner)}
             />
             <Gameboard
               xTurn={xTurn}
-              isActive={true}
+              isActive={false}
               handleTurn={handleTurn}
               setGameWinner={(winner: string) => setGameC3Winner(winner)}
             />

@@ -83,14 +83,14 @@ export default function Gameboard({
   }, [tiles, boardWinner, xTurn]);
 
   return (
-    <div className={`relative aspect-square grid grid-cols-3 gap-2 p-2 rounded ${isActive ? 'bg-slate-600' : 'bg-green-600'}`}>
+    <div className={`relative aspect-square grid grid-cols-3 gap-2 p-2 rounded ${isActive ? 'bg-green-600' : 'bg-gray-600'}`}>
       {tiles
         .sort((a, b) => (a.position > b.position ? 1 : -1))
         .slice(1, 10)
         .map((tile) => (
           <div
             key={tile.position}
-            className={`${boardWinner === "" ? "opacity-100" : "opacity-40"}`}
+            className={`${boardWinner === "" ? "opacity-100" : "opacity-10"}`}
           >
             <GameTile
               content={tile.content}
@@ -100,11 +100,11 @@ export default function Gameboard({
         ))}
       {boardWinner === "X" ? (
         <div className="absolute right-[calc(50%+15vh)] top-[calc(50%-1vh)]">
-          <div className="absolute w-[30vh] h-2 bg-red-600 rotate-45 rounded" />
-          <div className="absolute w-[30vh] h-2 bg-red-600 -rotate-45 rounded" />
+          <div className="absolute w-[30vh] h-2 bg-blue-600 rotate-45 rounded" />
+          <div className="absolute w-[30vh] h-2 bg-blue-600 -rotate-45 rounded" />
         </div>
       ) : boardWinner === "O" ? (
-        <div className="absolute aspect-square w-[25vh] rounded-full border-8 border-blue-600 top-[calc(50%-12.5vh)] left-[calc(50%-12.5vh)]" />
+        <div className="absolute aspect-square w-[25vh] rounded-full border-8 border-red-600 top-[calc(50%-12.5vh)] left-[calc(50%-12.5vh)]" />
       ) : (
         ""
       )}
