@@ -43,11 +43,6 @@ export default function Gameboard({
         handleTurn();
       }
     }
-    //  else {
-      // alert(
-        // `Game is already over. ${winner} has won! Refresh page to restart.`
-      // );
-    // }
   };
 
   useEffect(() => {
@@ -85,14 +80,10 @@ export default function Gameboard({
         setGameWinner(xTurn ? "O" : "X");
       }
     }
-
-    // if (winner !== "") {
-    // alert(`Game Over! ${winner} Wins!`);
-    // }
   }, [tiles, boardWinner, xTurn]);
 
   return (
-    <div className={`relative aspect-square grid grid-cols-3 gap-2 p-4`}>
+    <div className={`relative aspect-square grid grid-cols-3 gap-2 p-2 rounded ${isActive ? 'bg-slate-600' : 'bg-green-600'}`}>
       {tiles
         .sort((a, b) => (a.position > b.position ? 1 : -1))
         .slice(1, 10)
@@ -113,7 +104,7 @@ export default function Gameboard({
           <div className="absolute w-[30vh] h-2 bg-red-600 -rotate-45 rounded" />
         </div>
       ) : boardWinner === "O" ? (
-        <div className="absolute aspect-square w-[30vh] rounded-full border-8 border-blue-800 left-1 top-1" />
+        <div className="absolute aspect-square w-[25vh] rounded-full border-8 border-blue-800 top-[calc(50%-12.5vh)] left-[calc(50%-12.5vh)]" />
       ) : (
         ""
       )}
