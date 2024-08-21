@@ -96,12 +96,12 @@ export default function Gameboard() {
         {
           winner === "X" ? 
           <div className="absolute right-[calc(50%+15vh)] top-[calc(50%-1vh)]">
-            <div className="absolute w-[30vh] h-2 bg-black rotate-45"/>
-            <div className="absolute w-[30vh] h-2 bg-black -rotate-45"/>
+            <div className="absolute w-[30vh] h-2 bg-red-600 rotate-45 rounded"/>
+            <div className="absolute w-[30vh] h-2 bg-red-600 -rotate-45 rounded"/>
           </div>
           :
           winner === "O" ?
-          <div className="absolute aspect-square w-[30vh] rounded-full border-8 border-black left-1 top-1"/>
+          <div className="absolute aspect-square w-[30vh] rounded-full border-8 border-blue-800 left-1 top-1"/>
           :
           ""
         }
