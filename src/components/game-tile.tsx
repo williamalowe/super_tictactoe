@@ -12,7 +12,7 @@ export default function GameTile({
 }) {
   return (
     <div
-      className="bg-blue-200 rounded aspect-square flex items-center justify-center h-[8vh] hover:bg-blue-400 cursor-pointer"
+      className="bg-white rounded aspect-square flex items-center justify-center h-[8vh] hover:bg-blue0 cursor-pointer"
       onClick={handleClick}
     >
       {content === "x" ? <XMarker /> : content === "o" ? <OMarker /> : ""}

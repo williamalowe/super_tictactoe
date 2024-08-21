@@ -104,7 +104,7 @@ export default function Gameboard({
           <div className="absolute w-[30vh] h-2 bg-red-600 -rotate-45 rounded" />
         </div>
       ) : boardWinner === "O" ? (
-        <div className="absolute aspect-square w-[25vh] rounded-full border-8 border-blue-800 top-[calc(50%-12.5vh)] left-[calc(50%-12.5vh)]" />
+        <div className="absolute aspect-square w-[25vh] rounded-full border-8 border-blue-600 top-[calc(50%-12.5vh)] left-[calc(50%-12.5vh)]" />
       ) : (
         ""
       )}
