@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [xTurn, setXTurn] = useState(true);
+  const [gameMounted, setGameMounted] = useState(true);
   const [gameWinner, setGameWinner] = useState("");
   const [gameA1Winner, setGameA1Winner] = useState("");
   const [gameA2Winner, setGameA2Winner] = useState("");
@@ -32,6 +33,7 @@ export default function Home() {
     setGameC3Winner("");
     setGameWinner("");
     setXTurn(true);
+    setGameMounted(false);
   };
 
   useEffect(() => {
@@ -77,75 +79,80 @@ export default function Home() {
     gameC2Winner,
     gameC3Winner,
   ]);
+  useEffect(() => {
+    setGameMounted(true)
+  }, [gameMounted])
 
   return (
     // <main className="h-screen grid items-center justify-center grid-cols-3 grid-rows-3 gap-2">
     <main className="flex h-screen flex-col items-center justify-center gap-y-4">
-      <div className="flex gap-x-4 items-center">
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameA1Winner(winner)}
-        />
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameA2Winner(winner)}
-        />
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameA3Winner(winner)}
-        />
-      </div>
-      <div className="flex gap-x-4 items-center">
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameB1Winner(winner)}
-        />
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameB2Winner(winner)}
-        />
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameB3Winner(winner)}
-        />
-      </div>
-      <div className="flex gap-x-4 items-center">
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameC1Winner(winner)}
-        />
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameC2Winner(winner)}
-        />
-        <Gameboard
-          xTurn={xTurn}
-          isActive={true}
-          handleTurn={handleTurn}
-          setGameWinner={(winner: string) => setGameC3Winner(winner)}
-        />
-      </div>
+      {gameMounted && (
+        <>
+          <div className="flex gap-x-4 items-center">
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameA1Winner(winner)}
+            />
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameA2Winner(winner)}
+            />
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameA3Winner(winner)}
+            />
+          </div>
+          <div className="flex gap-x-4 items-center">
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameB1Winner(winner)}
+            />
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameB2Winner(winner)}
+            />
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameB3Winner(winner)}
+            />
+          </div>
+          <div className="flex gap-x-4 items-center">
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameC1Winner(winner)}
+            />
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameC2Winner(winner)}
+            />
+            <Gameboard
+              xTurn={xTurn}
+              isActive={true}
+              handleTurn={handleTurn}
+              setGameWinner={(winner: string) => setGameC3Winner(winner)}
+            />
+          </div>
+        </>
+      )}
+
       {gameWinner !== "" && (
-        <GameOver 
-          winner={gameWinner}
-          handleReset={reset}
-        />
+        <GameOver winner={gameWinner} handleReset={reset} />
       )}
     </main>
   );
