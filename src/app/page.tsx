@@ -66,7 +66,7 @@ export default function Home() {
         gameC1Winner === gameB2Winner &&
         gameB2Winner === gameA3Winner)
     ) {
-      setGameWinner(gameA1Winner);
+      setGameWinner(xTurn ? "O" : "X");
     }
   }, [
     gameA1Winner,
