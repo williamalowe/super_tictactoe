@@ -142,7 +142,7 @@ export default function Home() {
     useEffect(() => {
       setGameMounted(true);
     }, [gameMounted]);
-
+  }
     return (
       <main className="flex h-screen flex-col items-center justify-center gap-y-4">
         {gameMounted && (
@@ -216,4 +216,3 @@ export default function Home() {
       </main>
     );
   };
-}

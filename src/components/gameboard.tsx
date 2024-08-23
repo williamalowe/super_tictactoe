@@ -40,7 +40,7 @@ export default function Gameboard({
           updatedTile.content = "o";
         }
         setTiles([...newTiles, updatedTile]);
-        handleTurn();
+        handleTurn(position);
       }
     }
   };
