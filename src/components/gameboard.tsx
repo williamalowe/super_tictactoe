@@ -10,7 +10,7 @@ export default function Gameboard({
 }: {
   xTurn: boolean;
   isActive: boolean;
-  handleTurn: () => void;
+  handleTurn: (nextBoard: number) => void;
   setGameWinner: (winner: string) => void;
 }) {
   const [boardWinner, setBoardWinner] = useState("");
