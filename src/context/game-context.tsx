@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type gameValues = {
   game: number;
@@ -79,20 +79,72 @@ export default function GameContextProvider({
   ] as gameValues[]);
 
   const takeTurn = (gameboard: gameValues[], tile: number) => {
-    const oldBoards = games.filter((game) => game.game !== gameboard[0].game);
-    let newContents = gameboard[0].contents;
-    newContents[tile] = xTurn ? "x" : "o";
-
-    let newBoard = {
-      game: gameboard[0].game,
-      winner: "",
-      active: true,
-      contents: newContents,
-    };
-    console.log(newBoard.contents);
-    setGames([...oldBoards, newBoard]);
-    setXTurn(!xTurn);
+    if (gameboard[0].active === true) {
+      const oldBoards = games.filter((game) => game.game !== gameboard[0].game);
+      let newContents = gameboard[0].contents;
+      newContents[tile] = xTurn ? "x" : "o";
+      let newBoard = {
+        game: gameboard[0].game,
+        winner: "",
+        active: true,
+        contents: newContents,
+      };
+      setGames([...oldBoards, newBoard]);
+      setXTurn(!xTurn);
+    } else {
+      alert("Invalid selection");
+    }
   };
+
+  const checkWins = () => {
+    for (let i = 0; i < games.length; i++) {
+      if (games[i].winner === "") {
+        if (
+          // horizontal wins
+          (games[i].contents[0] !== "" &&
+            games[i].contents[0] === games[i].contents[1] &&
+            games[i].contents[1] === games[i].contents[2]) ||
+          (games[i].contents[3] !== "" &&
+            games[i].contents[3] === games[i].contents[4] &&
+            games[i].contents[4] === games[i].contents[5]) ||
+          (games[i].contents[6] !== "" &&
+            games[i].contents[6] === games[i].contents[7] &&
+            games[i].contents[7] === games[i].contents[8]) ||
+          // vertical wins
+          (games[i].contents[0] !== "" &&
+            games[i].contents[0] === games[i].contents[3] &&
+            games[i].contents[3] === games[i].contents[6]) ||
+          (games[i].contents[1] !== "" &&
+            games[i].contents[1] === games[i].contents[4] &&
+            games[i].contents[4] === games[i].contents[7]) ||
+          (games[i].contents[2] !== "" &&
+            games[i].contents[2] === games[i].contents[5] &&
+            games[i].contents[5] === games[i].contents[8]) ||
+          // diagonal wins
+          (games[i].contents[0] !== "" &&
+            games[i].contents[0] === games[i].contents[4] &&
+            games[i].contents[4] === games[i].contents[8]) ||
+          (games[i].contents[2] !== "" &&
+            games[i].contents[2] === games[i].contents[4] &&
+            games[i].contents[4] === games[i].contents[6])
+        ) {
+          const oldBoards = games.filter((game) => game.game !== games[i].game);
+          let newBoard = {
+            game: games[i].game,
+            winner: xTurn ? "o" : "x",
+            active: false,
+            contents: games[i].contents,
+          };
+          setGames([...oldBoards, newBoard]);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkWins();
+    console.table(games);
+  }, [games, xTurn]);
 
   return (
     <GameContext.Provider value={{ xTurn, games, takeTurn }}>
