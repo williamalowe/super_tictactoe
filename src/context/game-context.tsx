@@ -74,23 +74,22 @@ export default function GameContextProvider({
       game: 9,
       winner: "",
       active: true,
-      contents: ["x", "", "", "", "", "", "", "", ""],
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
   ] as gameValues[]);
 
-  const takeTurn = (gameboard: gameValues, tile: number) => {
-    const oldBoards = games.filter((game) => game.game !== gameboard.game);
+  const takeTurn = (gameboard: gameValues[], tile: number) => {
+    const oldBoards = games.filter((game) => game.game !== gameboard[0].game);
+    let newContents = gameboard[0].contents;
+    newContents[tile] = xTurn ? "x" : "o";
+
     let newBoard = {
-      game: gameboard.game,
+      game: gameboard[0].game,
       winner: "",
       active: true,
-      contents: gameboard.contents,
-    }
-    if (xTurn) {
-      newBoard.contents[tile] = "x";
-    } else {
-      newBoard.contents[tile] = "o";
-    }
+      contents: newContents,
+    };
+    console.log(newBoard.contents);
     setGames([...oldBoards, newBoard]);
     setXTurn(!xTurn);
   };
