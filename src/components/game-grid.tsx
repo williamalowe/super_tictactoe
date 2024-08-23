@@ -31,13 +31,13 @@ export default function GameGrid({ game }: { game: gameValues }) {
         
       />
       <GameTile 
-        
+        content=""
       />
       <GameTile 
-        
+        content="x"
       />
       <GameTile 
-        
+        content="o"
       />
     </div>
   );
