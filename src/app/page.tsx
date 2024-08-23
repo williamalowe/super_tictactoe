@@ -26,9 +26,8 @@ export default function Home() {
   const [gameC2Winner, setGameC2Winner] = useState("");
   const [gameC3Winner, setGameC3Winner] = useState("");
 
-  const handleTurn = (nextBoard: number) => {
+  const handleTurn = () => {
     setXTurn(!xTurn);
-    setActiveBoard(nextBoard);
   };
 
   const setActiveBoard = (activateBoard: number) => {
@@ -151,68 +150,77 @@ export default function Home() {
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameA1Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameA1Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameA2Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameA2Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameA3Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameA3Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
             </div>
             <div className="flex gap-x-4 items-center">
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameB1Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameB1Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameB2Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameB2Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameB3Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameB3Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
             </div>
             <div className="flex gap-x-4 items-center">
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameC1Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameC1Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameC2Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameC2Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
               <Gameboard
                 xTurn={xTurn}
                 isActive={gameC3Active}
-                handleTurn={(nextBoard: number) => handleTurn(nextBoard)}
+                handleTurn={handleTurn}
                 setGameWinner={(winner: string) => setGameC3Winner(winner)}
+                setNextActiveBoard={(nextBoard: number) => setActiveBoard(nextBoard)}
               />
             </div>
           </>
         )}
 
-        {gameWinner !== "" && (
+        {/* {gameWinner !== "" && (
           <GameOver winner={gameWinner} handleReset={reset} />
-        )}
+        )} */}
       </main>
     );
   };
