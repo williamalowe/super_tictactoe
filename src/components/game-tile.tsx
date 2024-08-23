@@ -1,3 +1,4 @@
+import OToken from "./oToken"
 import XToken from "./xToken"
 
 export default function GameTile({ content }: {
@@ -9,7 +10,11 @@ export default function GameTile({ content }: {
         content === "x" ?
         <XToken />
         :
+        content === "o" ?
+        <OToken />
+        :
         <></>
+
       }
     </div>
   )
