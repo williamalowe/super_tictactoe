@@ -1,21 +1,17 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-type Game = {
-  activeBoard: number;
-  xTurn: boolean;
-};
 type gameValues = {
-  game: number,
-  winner: string,
-  active: boolean,
-  contents: string[],
-}
+  game: number;
+  winner: string;
+  active: boolean;
+  contents: string[];
+};
 
 type GameContextType = {
-  nextTurn: () => void;
-  games: gameValues[],
+  takeTurn: (gameboard: gameValues, tile: number) => void;
+  games: gameValues[];
 };
 const GameContext = createContext<GameContextType | any>(null);
 
@@ -24,67 +20,85 @@ export default function GameContextProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [xTurn, setXTurn] = useState(true);
   const [games, setGames] = useState([
     {
       game: 1,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 2,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 3,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 4,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 5,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 6,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 7,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 8,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["", "", "", "", "", "", "", "", ""],
     },
     {
       game: 9,
       winner: "",
       active: true,
-      contents: ["","","","","","","","",""]
+      contents: ["x", "", "", "", "", "", "", "", ""],
     },
-  ] as gameValues[])
+  ] as gameValues[]);
 
+  const takeTurn = (gameboard: gameValues, tile: number) => {
+    const oldBoards = games.filter((game) => game.game !== gameboard.game);
+    let newBoard = {
+      game: gameboard.game,
+      winner: "",
+      active: true,
+      contents: gameboard.contents,
+    }
+    if (xTurn) {
+      newBoard.contents[tile] = "x";
+    } else {
+      newBoard.contents[tile] = "o";
+    }
+    setGames([...oldBoards, newBoard]);
+    setXTurn(!xTurn);
+  };
 
-  const nextTurn = () => {};
   return (
-    <GameContext.Provider value={{ nextTurn, games }}>{children}</GameContext.Provider>
+    <GameContext.Provider value={{ xTurn, games, takeTurn }}>
+      {children}
+    </GameContext.Provider>
   );
 }
 
