@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.className}`}>
+      <body className={`${font.className} h-screen w-screen flex flex-col`}>
         <GameContextProvider>{children}</GameContextProvider>
       </body>
     </html>
