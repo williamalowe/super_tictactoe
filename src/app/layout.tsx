@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Code_Pro } from "next/font/google";
 import "./globals.css";
+import GameContextProvider from "@/context/game-context";
 
 const font = Source_Code_Pro({ subsets: ["latin"] });
 
@@ -17,8 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className}`}>
-        {children}
-        </body>
+        <GameContextProvider>{children}</GameContextProvider>
+      </body>
     </html>
   );
 }
