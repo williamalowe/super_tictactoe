@@ -1,6 +1,11 @@
+"use client";
+import { useGame } from "@/context/game-context";
 import GameGrid from "./game-grid";
 
 export default function Gameboard() {
+  const { games } = useGame();
+
+  console.log(games);
   return (
     <section className="flex-1 aspect-square flex flex-col gap-4 bg-black">
       <div className="flex-1 flex gap-4">
@@ -19,5 +24,5 @@ export default function Gameboard() {
         <GameGrid />
       </div>
     </section>
-  )
+  );
 }
